@@ -3,6 +3,7 @@
 #define PASSWORD_MANAGER_H_  
 
 #include <string>
+#include <vector>
 
 #include "../database/entities.h"
 
@@ -23,6 +24,13 @@ class PasswordManager {
 
   bool UserExists(const db::User &user) const;
   bool LoginUser(const db::User &user, bool hash_password = false);
+  bool CreateUser(const db::User &user);
+
+  std::vector<db::Password> LoadPasswords();
+  void SavePassword(const db::Password &password);
+  
+ private:
+  std::string HashPassword(const std::string &password) const;
 };
 
 } // namespace core
